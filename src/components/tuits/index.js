@@ -4,7 +4,6 @@ import Tuit from "./tuit";
 import * as likeService from "../../services/likes-service";
 import * as tuitService from '../../services/tuits-service';
 import * as authService from "../../services/auth-service";
-import * as dislikeService from "../../services/dislikes-service"
 
 const Tuits = ({tuits = [], refreshTuits}) => {
     const [profile, setProfile] = useState(undefined);
@@ -28,16 +27,6 @@ const Tuits = ({tuits = [], refreshTuits}) => {
         }
     }
 
-    const dislikeTuit = (tuit) => {
-        if (profile !== undefined) {
-            dislikeService.userTogglesTuitDislikes("me", tuit._id)
-                .then(refreshTuits)
-                .catch(e => alert(e));
-        } else {
-            alert("Please log in!")
-        }
-    }
-
     const deleteTuit = (tid) =>
         tuitService.deleteTuit(tid)
             .then(refreshTuits);
@@ -51,7 +40,6 @@ const Tuits = ({tuits = [], refreshTuits}) => {
               <Tuit key={tuit._id}
                     deleteTuit={deleteTuit}
                     likeTuit={likeTuit}
-                    dislikeTuit={dislikeTuit}
                     tuit={tuit}/>
             );
           })

@@ -22,7 +22,7 @@ const TuitStats = ({tuit, likeTuit}) => {
               </span>
             </div>
             <div className="col">
-                <span>
+                <span >
                   {
                       tuit.stats && tuit.stats.dislikes !== undefined &&
                       <i className={"fa-regular fa-thumbs-down me-1"}

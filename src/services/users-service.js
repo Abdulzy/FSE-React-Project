@@ -1,7 +1,7 @@
 import axios from "axios";
+import axios from "axios";
 const BASE_URL = "https://fse2node.herokuapp.com/api";
 // const BASE_URL = "http://localhost:4000/api";
-const TUITS_API = `${BASE_URL}/tuits`;
 const LOGIN_API = `${BASE_URL}/api/login`;
 const USERS_API = `${BASE_URL}/api/users`;
 
