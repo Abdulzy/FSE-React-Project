@@ -1,15 +1,48 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './tuits.css';
 import Tuit from "./tuit";
 import * as likeService from "../../services/likes-service";
 import * as tuitService from '../../services/tuits-service';
+import * as authService from "../../services/auth-service";
 
 const Tuits = ({tuits = [], refreshTuits}) => {
+    const [profile, setProfile] = useState({});
+    const [maintainTuits, setMaintainTuits] = useState(tuits);
+    useEffect(async ()=> {
+        try {
+            const user = await authService.profile();
+            setProfile(user);
+            likeService.findAllTuitsLikedByUser("me")
+                .then((likes) => {
+                    const likedTuitsIds = likes.map(l => l.tuit._id);
+                    console.log(likedTuitsIds);
+                    const fetchTuits = tuits.map((t) => {
+                        let copyT = t;
+                        if (likedTuitsIds.indexOf(t._id) >= 0) {
+                            copyT = {...copyT, likedByMe: true};
+                        }
+                        if (t.postedBy._id === profile._id) {
+                            copyT = {...copyT, ownedByMe: true}
+                        }
 
-    const likeTuit = (tuit) =>
-        likeService.userTogglesTuitLikes("me", tuit._id)
-            .then(refreshTuits)
-            .catch(e => alert(e));
+                        return copyT;
+                    })
+                    setMaintainTuits(fetchTuits);
+                })
+        } catch (e) {
+        }
+    }, [tuits]);
+
+    const likeTuit = (tuit) => {
+        console.log(profile === {})
+        if (profile !== undefined || profile !== {}) {
+            likeService.userTogglesTuitLikes("me", tuit._id)
+                .then(refreshTuits)
+                .catch(e => alert(e));
+        } else {
+            alert("Please log in!")
+        }
+    }
 
     const deleteTuit = (tid) =>
         tuitService.deleteTuit(tid)
@@ -19,7 +52,7 @@ const Tuits = ({tuits = [], refreshTuits}) => {
     <div>
       <ul className="ttr-tuits list-group">
         {
-          tuits.map && tuits.map(tuit => {
+          maintainTuits.map && maintainTuits.map(tuit => {
             return (
               <Tuit key={tuit._id}
                     deleteTuit={deleteTuit}
