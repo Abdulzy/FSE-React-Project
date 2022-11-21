@@ -1,13 +1,21 @@
-import axios from "axios";
-const BASE_URL = "https://fse2node.herokuapp.com/api";
-// const BASE_URL = "http://localhost:4000/api";
-const TUITS_API = `${BASE_URL}/tuits`;
-const USERS_API = `${BASE_URL}/users`;
+/**
+ * @file Implements the service layer that helps fetch likes remote API
+ */
+ import axios from "axios";
+ const BASE_URL = "https://fse2node.herokuapp.com/api";
+ const USERS_API = `${BASE_URL}/users`;
 
 const api = axios.create({
     withCredentials: true
 });
 
+/**
+ * PUT method for toggling likes (likes / undo the likes) to a tuit
+ * @param uid User's primary key
+ * @param tid Tuit's primary key
+ * @returns {Promise<AxiosResponse<any>>} Status on whether tuit is liked or undoing the like
+ * successfully or not
+ */
 export const userTogglesTuitLikes = (uid, tid) =>
     api.put(`${USERS_API}/${uid}/likes/${tid}`)
         .then(response => response.data);

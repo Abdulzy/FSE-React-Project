@@ -2,6 +2,8 @@ import React from "react";
 import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
+import {useLocation, useParams} from "react-router-dom";
+import {createTuitByUser} from "../../services/tuits-service";
 import * as authService from "../../services/auth-service";
 
 const Home = () => {
@@ -9,9 +11,7 @@ const Home = () => {
   const [tuit, setTuit] = useState('');
   const findTuits = () => {
     return service.findAllTuits()
-        .then(tuits => {
-          setTuits(tuits)
-        })
+        .then(tuits => setTuits(tuits))
   }
   const [profile, setProfile] = useState({});
 
