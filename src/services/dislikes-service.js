@@ -5,7 +5,7 @@
  const BASE_URL = "https://fse2node.herokuapp.com/api";
 const USERS_API = `${BASE_URL}/api/users`;
 
-const api = axios.create({
+export const api = axios.create({
     withCredentials: true
 });
 

@@ -3,7 +3,9 @@
  */
  import axios from "axios";
  const BASE_URL = "https://fse2node.herokuapp.com/api";
- const USERS_API = `${BASE_URL}/users`;
+
+const LOGIN_API = `${BASE_URL}/api/login`;
+const USERS_API = `${BASE_URL}/api/users`;
 
 /**
  * POST method to create a new user

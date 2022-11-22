@@ -3,8 +3,8 @@
  */
  import axios from "axios";
  const BASE_URL = "https://fse2node.herokuapp.com/api";
- const TUITS_API = `${BASE_URL}/tuits`;
- const USERS_API = `${BASE_URL}/users`;
+const TUITS_API = `${BASE_URL}/api/tuits`;
+const USERS_API = `${BASE_URL}/api/users`;
 
 export const api = axios.create({
     withCredentials: true

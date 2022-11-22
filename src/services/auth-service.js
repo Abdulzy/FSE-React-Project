@@ -3,6 +3,7 @@
  */
  import axios from "axios";
  const BASE_URL = "https://fse2node.herokuapp.com/api";
+
 const AUTH_API = `${BASE_URL}/api/auth`
 
 const api = axios.create({

@@ -1,5 +1,14 @@
+/**
+ * @file Implements TuitStats component for displaying tuit's stats
+ */
 import React, {useEffect} from "react";
 
+/**
+ * TuitStats component that will display stats of each tuit
+ * @param tuit The tuit
+ * @param likeTuit callback function for liking a tuit
+ * @param dislikeTuit callback function for disliking a tuit
+ */
 const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
     return (
         <div className="row mt-2">
@@ -15,7 +24,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
               <span onClick={() => likeTuit(tuit)}>
                   {
                       tuit.stats && tuit.stats.likes !== undefined &&
-                      <i className={"fa-regular fa-thumbs-up me-1"}
+                      <i className={"fa-regular fa-thumbs-up tuit-button me-1"}
                          style={tuit.likedByMe === true ? {color: "blue"} : {}}/>
                   }
                   {tuit.stats && <span>{tuit.stats.likes}</span>}
@@ -25,7 +34,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
                 <span onClick={()=>dislikeTuit(tuit)}>
                   {
                       tuit.stats && tuit.stats.dislikes !== undefined &&
-                      <i className={"fa-regular fa-thumbs-down me-1"}
+                      <i className={"fa-regular fa-thumbs-down tuit-button me-1"}
                          style={tuit.dislikedByMe === true ? {color: "red"} : {}}/>
                   }
                     {tuit.stats && <span>{tuit.stats.dislikes}</span>}
